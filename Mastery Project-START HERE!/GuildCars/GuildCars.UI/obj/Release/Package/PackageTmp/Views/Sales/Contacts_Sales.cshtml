@@ -1,0 +1,88 @@
+﻿@model GuildCars.UI.Models.ContactViewModel
+
+@{
+    ViewBag.Title = "Specials_Admin";
+}
+<style>
+    .detailHeader {
+    text-align: right;
+    width: 75px;
+    vertical-align:top;
+    padding-right: 5px;
+    }
+</style>
+
+<div class="row">
+    <h2 style="margin-left: 15px; margin-bottom: 30px">Messages</h2>
+</div>
+@if (TempData["Success"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+}
+
+<div class="col-xs-10 col-lg-10">
+    @if (Model.Contacts.Any())
+    {
+
+        foreach (var contact in Model.Contacts)
+        {
+            <div style="border: solid; margin-bottom: 10px; height: auto">
+
+                <div class="col-lg-10 col-xs-10" style="margin-top:5px">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="detailHeader"><strong>Name: </strong></td>
+                                <td>@contact.ContactName</td>
+                            </tr>
+                            <tr>
+                                <td class="detailHeader"><strong>Phone: </strong></td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(contact.ContactPhone))
+                                    {
+                                        <text>@contact.ContactPhone</text>
+                                    }
+                                    else
+                                    {
+                                        <text>Not Provided</text>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detailHeader"><strong>Email: </strong></td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(contact.ContactEmail))
+                                    {
+                                        <text>@contact.ContactEmail</text>
+                                    }
+                                    else
+                                    {
+                                        <text>Not Provided</text>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detailHeader"><strong>Message: </strong></td>
+                                <td>@contact.ContactMessage</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top:8%">
+                        <p><strong>Date Sent: </strong>@contact.ContactSentDate.ToString("dddd, dd MMMM yyyy, hh:mm tt")</p>
+                    </div>
+                </div>
+                <div style="margin-left: 85%; margin-top: 15%; padding: 5px">
+                    @using (Html.BeginForm("DeleteContact_Sales", "Sales", FormMethod.Post))
+                    {
+                        @Html.Hidden("contactId", contact.ContactId);
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this message?');">Delete</button>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>You do not have any messages.</p>
+    }
+</div>

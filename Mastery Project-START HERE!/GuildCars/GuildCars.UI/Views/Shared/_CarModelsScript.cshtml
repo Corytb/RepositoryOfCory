@@ -1,0 +1,23 @@
+﻿                var params = 'CarMakeId=' + $('#ddShowMakes').val();
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://localhost:44369/api/Search/Models?' + params,
+                    success: function (results) {
+                        $('#ddShowModels').empty();
+
+                        $.each(results, function (index, carModel) {
+
+                            var modelResult = '<option ';
+                            if (carModel.CarModelId == @Model.Vehicle.CarModelId) {
+                                modelResult += 'selected="selected" ';
+                            }
+                            modelResult += 'value="' + carModel.CarModelId + '">' + carModel.CarModelName + '</option>';
+
+                            $('#ddShowModels').append(modelResult);
+
+                        });
+                    },
+                    error: function () {
+                        alert('Error performing search, try again later!')
+                    }
+                });

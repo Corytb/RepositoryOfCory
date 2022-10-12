@@ -1,0 +1,116 @@
+﻿@model GuildCars.UI.Models.InventoryReportViewModel
+@{
+    ViewBag.Title = "InventoryReports_Reports";
+}
+
+<style>
+    table, th {
+        border: 1px solid black;
+    }
+
+    thead {
+        background-color: darkgray;
+    }
+
+    td {
+        border-right: solid 1px black;
+    }
+
+    h2, h4 {
+        font-weight: bold;
+    }
+</style>
+
+<h2>Inventory Report</h2>
+<p>
+    <a href="@Url.Action("Index_Reports", "Reports")">Back to Reports</a>
+</p>
+<div class="row">
+    <div class="col-xs-10">
+        <h4>New Vehicles</h4>
+        @if (Model.NewVehicleInventory.Any())
+        {
+            <table style="width: auto;" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Year
+                        </th>
+                        <th>
+                            Make
+                        </th>
+                        <th>
+                            Model
+                        </th>
+                        <th>
+                            Count
+                        </th>
+                        <th>
+                            Stock Value
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var inventory in Model.NewVehicleInventory)
+                    {
+                        <tr>
+                            <td>@inventory.Year</td>
+                            <td>@inventory.Make</td>
+                            <td>@inventory.Model</td>
+                            <td>@inventory.Count</td>
+                            <td>@inventory.StockValue.ToString("c")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>You do not have any New Vehicle Inventory</p>
+        }
+
+
+        <h4>Used Vehicles</h4>
+        @if (Model.UsedVehicleInventory.Any())
+        {
+            <table style="width: auto;" class="table table-striped">
+                <thead>
+                    <tr style="background-color: darkgray">
+                        <th>
+                            Year
+                        </th>
+                        <th>
+                            Make
+                        </th>
+                        <th>
+                            Model
+                        </th>
+                        <th>
+                            Count
+                        </th>
+                        <th>
+                            Stock Value
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var inventory in Model.UsedVehicleInventory)
+                    {
+                        <tr>
+                            <td>@inventory.Year</td>
+                            <td>@inventory.Make</td>
+                            <td>@inventory.Model</td>
+                            <td>@inventory.Count</td>
+                            <td>@inventory.StockValue.ToString("c")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>You do not have any Used Vehicle Inventory</p>
+        }
+
+    </div>
+</div>

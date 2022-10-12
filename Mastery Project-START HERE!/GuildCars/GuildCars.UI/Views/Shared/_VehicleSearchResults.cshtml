@@ -1,0 +1,63 @@
+﻿    //formats sale and MSRPs to currency
+    let currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+    let formattedVehicleSalePrice = currencyFormatter.format(vehicle.SalePrice);
+    let formattedVehicleMsrpPrice = currencyFormatter.format(vehicle.MSRP);
+    //formats vehicle mileage
+    let mileageFormatter = new Intl.NumberFormat('en-US', {});
+    let formattedVehicleMileage = mileageFormatter.format(vehicle.VehicleMileage);
+
+    //Displays vehicleMileage OR "New" for "VehicleMileage" field
+    var usedOrNew;
+    if (vehicle.IsNewCar) {
+        usedOrNew = "New";
+    }
+    else {
+        usedOrNew = formattedVehicleMileage;
+
+    }
+
+    var vehicleResult = '<style>';
+    vehicleResult += '.detailHeader {';
+    vehicleResult += 'text-align: right;';
+    vehicleResult += '}';
+    vehicleResult += 'td {';
+    vehicleResult += 'padding: 5px;';
+    vehicleResult += 'width:140px;';
+    vehicleResult += '}';
+    vehicleResult += '</style>';
+
+
+    vehicleResult += '<div class="row" style="border:solid; margin-top:10px">';
+    vehicleResult += '<div class="col-lg-2 col-md-2 col-xs-10" style = "margin-top:10px" >';
+    vehicleResult += '<p><strong>' + vehicle.ModelYear + ' ' + vehicle.CarMakeName + ' ' + vehicle.CarModelName + '</strong></p>';
+    vehicleResult += '<img src="' + imagePath + vehicle.VehicleImageFileName + '" style="max-width: 200px; height: auto; margin:5px"/>';
+    vehicleResult += '</div >';
+    vehicleResult += '<div class="col-lg-9 col-md-9 col-xs-9" style="margin-top:40px; margin-left:20px">';
+    vehicleResult += '<table>';
+    vehicleResult += '<tbody>';
+    vehicleResult += '<tr>';
+    vehicleResult += '<td class="detailHeader"><strong>Body Style: </strong></td>';
+    vehicleResult += '<td>' + vehicle.CarBodyType + '</td>';
+    vehicleResult += '<td class="detailHeader"><strong>Interior: </strong></td>';
+    vehicleResult += '<td>' + vehicle.InteriorColorType + '</td>';
+    vehicleResult += '<td class="detailHeader"><strong>Sale Price: </strong></td>';
+    vehicleResult += '<td>' + formattedVehicleSalePrice + '</td>';
+    vehicleResult += '</tr>';
+    vehicleResult += '<tr>';
+    vehicleResult += '<td class="detailHeader"><strong>Trans: </strong></td>';
+    vehicleResult += '<td>' + vehicle.TransmissionType + '</td>';
+    vehicleResult += '<td class="detailHeader"><strong>Mileage: </strong></td>';
+    vehicleResult += '<td><text>' + usedOrNew + '</text></td>';
+    vehicleResult += '<td class="detailHeader"><strong>MSRP: </strong></td>';
+    vehicleResult += '<td>' + formattedVehicleMsrpPrice + '</td>';
+    vehicleResult += '</tr>';
+    vehicleResult += '<tr>';
+    vehicleResult += '<td class="detailHeader"><strong>Color: </strong></td>';
+    vehicleResult += '<td>' + vehicle.InteriorColorType + '</td>';
+    vehicleResult += '<td class="detailHeader"><strong>VIN #: </strong></td>';
+    vehicleResult += '<td>' + vehicle.VinNumber + '</td>';
+    vehicleResult += '</tr>';
+    vehicleResult += '</tbody>';
+    vehicleResult += '</table>';
+    vehicleResult += '<div class="row">';
+    vehicleResult += '<div class="col-lg-1 col-md-1 col-xs-1" style="margin-left: 80%; margin-top: 1px; margin-bottom: 10px">';

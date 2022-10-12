@@ -1,0 +1,127 @@
+﻿@model GuildCars.UI.Models.PurchaseVehicleViewModel
+
+@{
+    ViewBag.Title = "ConfirmPurchase_Sales";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Confirm Purchase</h2>
+    </div>
+</div>
+
+
+<style>
+    .detailHeader {
+        text-align: right;
+    }
+
+    td {
+        padding: 5px;
+        width: 140px;
+    }
+</style>
+
+<div class="row" style="border:solid;">
+    <div class="col-lg-2 col-md-2 col-xs-10" style="margin-top:10px; min-height:200px">
+        <p><strong>@Model.Vehicle.ModelYear @Model.Vehicle.CarMakeName @Model.Vehicle.CarModelName</strong></p>
+        <img src="@Url.Content("~/Images/" + Model.Vehicle.VehicleImageFileName)" style="max-width: 200px; height: auto; margin:5px" />
+    </div>
+    <div class="col-lg-9 col-md-9 col-xs-9" style="margin-top:40px; margin-left:20px">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="detailHeader"><strong>Body Style: </strong></td>
+                    <td>@Model.Vehicle.CarBodyType</td>
+                    <td class="detailHeader"><strong>Interior: </strong></td>
+                    <td>@Model.Vehicle.InteriorColorType</td>
+                    <td class="detailHeader"><strong>Sale Price: </strong></td>
+                    <td>@Model.Vehicle.SalePrice.ToString("c")</td>
+                </tr>
+                <tr>
+                    <td class="detailHeader"><strong>Trans: </strong></td>
+                    <td>@Model.Vehicle.TransmissionType</td>
+                    <td class="detailHeader"><strong>Mileage: </strong></td>
+                    <td>
+                        @if (Model.Vehicle.IsNewCar)
+                        {
+                            <text>New</text>
+                        }
+                        else
+                        {
+                            @Model.Vehicle.VehicleMileage.ToString()
+                        }
+
+                    </td>
+                    <td class="detailHeader"><strong>MSRP: </strong></td>
+                    <td>@Model.Vehicle.MSRP.ToString("c")</td>
+                </tr>
+                <tr>
+                    <td class="detailHeader"><strong>Color: </strong></td>
+                    <td>@Model.Vehicle.InteriorColorType</td>
+                    <td class="detailHeader"><strong>VIN #: </strong></td>
+                    <td>@Model.Vehicle.VinNumber</td>
+                </tr>
+                <tr>
+                    <td class="detailHeader" style="vertical-align:top"><strong>Description: </strong></td>
+                    <td colspan="5">@Model.Vehicle.VehicleDescription</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@if (Model.Vehicle.IsPurchasedCar)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+}
+else
+{
+    <text>Something went wrong and the purchase did not go through!</text>
+}
+
+
+
+<div class="row" style="border:solid;">
+    <div class="col-lg-10 col-md-10 col-xs-10" style="margin-top:10px; min-height:175px">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="detailHeader"><strong>Customer Name: </strong></td>
+                    <td><strong>@Model.confirmedPurchase.CustomerName</strong></td>
+                    <td class="detailHeader"><strong>Customer Phone: </strong></td>
+                    <td>@Model.confirmedPurchase.CustomerPhone</td>
+                </tr>
+                <tr>
+                    <td class="detailHeader"><strong>Customer Address: </strong></td>
+                    <td>@Model.confirmedPurchase.CustomerStreet1</td>
+                    <td class="detailHeader"><strong>Customer Email: </strong></td>
+                    <td>@Model.confirmedPurchase.CustomerEmail</td>
+                </tr>
+                <tr>
+                    @if (!string.IsNullOrEmpty(@Model.confirmedPurchase.CustomerStreet2))
+                    {
+                        <td class="detailHeader"><strong>Street 2: </strong></td>
+                        <td>@Model.confirmedPurchase.CustomerStreet2</td>
+                    }
+                </tr>
+                <tr>
+                    <td class="detailHeader"><strong>City, State: </strong></td>
+                    <td>@Model.confirmedPurchase.CustomerCity , @Model.confirmedPurchase.StateId</td>
+                </tr>
+                <tr>
+                    <td class="detailHeader" style="vertical-align:top" rowspan="4"><strong>Zip: </strong></td>
+                    <td style="vertical-align:top" rowspan="4">@Model.confirmedPurchase.CustomerZip</td>
+                </tr>
+
+                <tr>
+                    <td class="detailHeader"><strong>Purchase Price: </strong></td>
+                    <td>@Model.confirmedPurchase.PurchasePrice.ToString("c")</td>
+                </tr>
+                <tr>
+                    <td class="detailHeader"><strong>Form of Payment: </strong></td>
+                    <td>@Model.confirmedPurchase.PurchasePaymentType</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model List<GuildCars.Models.Queries.UserListItem>
+
+@{
+    ViewBag.Title = "Users_Admin";
+}
+
+<style>
+    table, th {
+        border: 1px solid black;
+    }
+
+    td {
+        border-right: solid 1px black;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Users</h2>
+        <a>@Html.ActionLink("Add a new User", "AddUser_Admin", "Admin")</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model.Any())
+        {
+            <table class="table table-striped" style="margin-top: 15px">
+                <thead>
+                    <tr style="background-color: darkgray">
+                        <th>Last Name</th>
+                        <th>First name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.LastName</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.Email</td>
+                            <td>@user.UserRole</td>
+                            <td>@Html.ActionLink("edit", "EditUser_Admin", "Admin", new { id = user.UserId }, null)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Currently no App Users to display</p>
+            <p>How are you logged in now?</p>
+        }
+
+    </div>
+</div>

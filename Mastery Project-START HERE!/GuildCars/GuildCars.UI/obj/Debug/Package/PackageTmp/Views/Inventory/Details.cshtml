@@ -1,0 +1,73 @@
+﻿@model GuildCars.Models.Queries.VehicleDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .detailHeader {
+        text-align: right;
+    }
+    td {
+        padding: 5px;
+        width:140px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Vehicle Details</h2>
+    </div>
+</div>
+<div class="row" style="border:solid;">
+    <div class="col-lg-2 col-md-2 col-xs-10" style="margin-top:10px">
+        <p><strong>@Model.ModelYear @Model.CarMakeName @Model.CarModelName</strong></p>
+        <img src="@Url.Content("~/Images/" + Model.VehicleImageFileName)" style="max-width: 200px; height: auto; margin:5px"  />
+    </div>
+    <div class="col-lg-9 col-md-9 col-xs-9" style="margin-top:40px; margin-left:20px">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="detailHeader"><strong>Body Style: </strong></td>
+                    <td>@Model.CarBodyType</td>
+                    <td class="detailHeader"><strong>Interior: </strong></td>
+                    <td>@Model.InteriorColorType</td>
+                    <td class="detailHeader"><strong>Sale Price: </strong></td>
+                    <td>@Model.SalePrice.ToString("c")</td>
+                </tr>
+                <tr>
+                    <td class="detailHeader"><strong>Trans: </strong></td>
+                    <td>@Model.TransmissionType</td>
+                    <td class="detailHeader"><strong>Mileage: </strong></td>
+                    <td>
+                        @if (Model.IsNewCar)
+                        {
+                            <text>New</text>
+                        }
+                        else
+                        {
+                            @Model.VehicleMileage.ToString()
+                        }
+
+                    </td>
+                    <td class="detailHeader"><strong>MSRP: </strong></td>
+                    <td>@Model.MSRP.ToString("c")</td>
+                </tr>
+            <tr>
+                <td class="detailHeader"><strong>Color: </strong></td>
+                <td>@Model.InteriorColorType</td>
+                <td class="detailHeader"><strong>VIN #: </strong></td>
+                <td>@Model.VinNumber</td>
+            </tr>
+            <tr>
+                <td class="detailHeader" style="vertical-align:top"><strong>Description: </strong></td>
+                <td colspan="5">@Model.VehicleDescription</td>
+            </tr>
+        </tbody>
+    </table>
+        <div class="row">
+            <div class="col-lg-1 col-md-1 col-xs-1" style="margin-left: 92%; margin-top: 50px; margin-bottom: 10px">
+                <button class="btn btn-default">@Html.ActionLink("Contact Us", "Contact", "Home", new { vinNumber = Model.VinNumber, carMake = Model.CarMakeName, carModel = Model.CarModelName, carYear = Model.ModelYear}, null)</button>
+            </div>
+        </div>
+    </div>
+</div>

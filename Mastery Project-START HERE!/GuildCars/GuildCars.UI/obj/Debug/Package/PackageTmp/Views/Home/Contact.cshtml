@@ -1,0 +1,102 @@
+﻿@model GuildCars.UI.Models.ContactViewModel
+@{
+    ViewBag.Title = "Contact";
+}
+
+<head>
+    <script type='text/javascript'>
+        function GetMap() {
+            var map = new Microsoft.Maps.Map('#myMap', {
+                credentials: '@Model.MapKey',
+                center: new Microsoft.Maps.Location(44.89328561347202, -93.26619403763642)
+            });
+
+            var center = map.getCenter();
+
+            //Create custom Pushpin
+            var pin = new Microsoft.Maps.Pushpin(center, {
+                title: 'Guild Cars'
+            });
+
+            //Add the pushpin to the map
+            map.entities.push(pin);
+        }
+    </script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+
+
+</head>
+<h2 style="margin-left: 15px; margin-bottom: 30px">Contact Us</h2>
+
+@if (TempData["Success"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+}
+
+
+<div class="col-xs-12 col-lg-12">
+    <div class="col-lg-4">
+        @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddContact" }))
+        {
+            @Html.ValidationSummary()
+            <div class="form-group row">
+                <label>Name</label>
+                @Html.TextBoxFor(m => m.Contact.ContactName, new { @class = "form-control" })
+            </div>
+            <div class="form-group row">
+                <label>Email</label>
+                @Html.TextBoxFor(m => m.Contact.ContactEmail, new { @class = "form-control" })
+            </div>
+            <div class="form-group row">
+                <label>Phone</label>
+                @Html.TextBoxFor(m => m.Contact.ContactPhone, new { @class = "form-control" })
+            </div>
+            <div class="form-group row">
+                <label>Message</label>
+                @Html.TextAreaFor(m => m.Contact.ContactMessage, new { @class = "form-control", style = "min-height: 175px" })
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" style="margin-top:10px">Submit</button>
+            </div>
+        }
+    </div>
+
+    <div class="col-lg-5">
+
+        <div id="myMap" style="margin-top: 20px; position:relative;width:400px;height:300px;"></div>
+
+
+
+        <address style="margin-top: 10px">
+            6041 Oakland Ave S<br />
+            Minneapolis, MN 55417<br />
+        </address>
+
+        <address>
+            <strong>Sales:</strong>   612-798-4731<br />
+            <strong>Email:</strong> <a href="mailto:GuildCars@example.com">GuildCars@example.com</a>
+        </address>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+
+    <script>
+            $(document).ready(function () {
+                $('#frmAddContact').validate({
+                    rules: {
+                        'Contact.ContactName': {
+                            required: true
+                        },
+                        'Contact.ContactMessage': {
+                            required: true
+                        }
+                    }
+                });
+            });
+
+        </script>
+}

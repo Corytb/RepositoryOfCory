@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Sales</h2>
+    </div>
+</div>
+
+<div id="loadSearchForm">
+    @Html.Partial("_VehicleSearchForm")
+</div>
+
+
+<div class="row">
+    <div id="searchResults" class="col-xs-12">
+
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            $("#searchForm").submit(function (e) {
+                search();
+            });
+        });
+
+        function search() {
+
+            var params;
+            var imagePath = '@Url.Content("~/Images/")';
+            var detailsPath = '@Url.Action("PurchaseVehicle_Sales", "Sales")/';
+
+            params = 'MinPrice=' + $('#minPrice').val() + '&MaxPrice=' + $('#maxPrice').val() +
+                '&MinYear=' + $('#minYear').val() + '&MaxYear=' + $('#maxYear').val() +
+                '&GeneralSearchParam=' + $('#generalSearchParam').val();
+
+            $.ajax({
+                type: 'GET',
+                url: 'https://guildcarsui20220904153851.azurewebsites.net/api/Sales/Index?' + params,
+                //url: 'https://localhost:44369/api/Sales/Index?' + params,
+                success: function (results) {
+                    $('#searchResults').empty();
+
+                    var vehiclesDiv = $('#searchResults');
+
+                    var searchHeader = '<div class="row"><div class="col-xs-12"><h2>Search Results</h2></div></div >';
+                    vehiclesDiv.prepend(searchHeader);
+
+                    //"counter" variable is used to determine if any vehicles exist
+                    //if vehicles are "0" after the each loop, then it prints the message
+                    var counter = 0;
+                    $.each(results, function (index, vehicle) {
+
+                        counter++;
+                        @Html.Partial("_VehicleSearchResults")
+                        vehicleResult += '<button class="btn btn-default"><a href="' + detailsPath + vehicle.VehicleId + '">Purchase</a></button></div>';
+                        vehicleResult += '</div>';
+                        vehicleResult += '</div>';
+                        vehicleResult += '</div>';
+                        vehicleResult += '</div>';
+
+                        vehiclesDiv.append(vehicleResult);
+
+                    });
+                    if (counter == 0) {
+                        var noVehiclesResult = '<div>No vehicles match those search parameters!</div>';
+                        vehiclesDiv.append(noVehiclesResult);
+                    }
+                },
+                error: function () {
+                    alert('Error performing search, try again later!')
+                }
+            });
+        }
+    </script>
+
+}

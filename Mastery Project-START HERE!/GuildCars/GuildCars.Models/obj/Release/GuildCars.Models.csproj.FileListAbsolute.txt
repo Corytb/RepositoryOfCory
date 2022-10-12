@@ -1,0 +1,6 @@
+C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Models\bin\Release\GuildCars.Models.dll
+C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Models\bin\Release\GuildCars.Models.pdb
+C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Models\obj\Release\GuildCars.Models.csproj.AssemblyReference.cache
+C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Models\obj\Release\GuildCars.Models.csproj.CoreCompileInputs.cache
+C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Models\obj\Release\GuildCars.Models.dll
+C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Models\obj\Release\GuildCars.Models.pdb

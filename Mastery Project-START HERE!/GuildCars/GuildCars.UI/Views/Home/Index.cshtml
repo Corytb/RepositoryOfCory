@@ -1,0 +1,134 @@
+﻿@model GuildCars.UI.Models.HomeIndexViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .itemTextDiv {
+        margin-top: 4%;
+    }
+    .specialHeader {
+        text-align: center; 
+        color: lightslategray;
+    }
+    .specialText {
+        text-align: center; 
+        color: lightslategray;
+    }
+    .specialImageDiv {
+        text-align: end;
+        margin-top: 4%;
+    }
+    .specialImage {
+        max-width: 300px;
+        height: auto;
+    }
+    .featuredVehicleImage {
+        max-width: 150px;
+        height: auto;
+        margin-top: 5px;
+    }
+    .featuredVehicleDiv {
+        border: solid;
+        width: 200px;
+        height: 200px;
+        margin-top: 60px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+</style>
+
+
+@if (TempData["Success"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+    <a href="@Url.Action("Specials", "Home")">
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            @*creates bottom indicator for each Special in the database (not including the always active headline)*@
+            @for (int i = 1; i <= Model.Specials.Count(); i++)
+            {
+                <li data-target="#myCarousel" data-slide-to="@i"></li>
+            }
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div style="height: 350px; background-image: url('/ImagesOther/CarouselBackground.PNG')" class="carousel-inner">
+
+            <!-- Always active slide -->
+            <div class="item active">
+                <div class="itemTextDiv col-xs-6 col-lg-6">
+                    <h1 class="specialHeader">Check out all our specials!</h1>
+                    <p class="specialText">Click here for more information on all our specials!</p>
+                </div>
+                <div class="specialImageDiv col-xs-5 col-lg-5">
+                    <img class="specialImage img-rounded mx-auto d-block" src="/Images/placeholder.png">
+                </div>
+            </div>
+            <!-- slides pulled from database -->
+            @foreach (var special in Model.Specials)
+            {
+                <div class="item">
+                    <div class="itemTextDiv col-xs-6 col-lg-6">
+                        <h1 class="specialHeader">@special.SpecialTitle</h1>
+                        <p class="specialText">@special.SpecialDescription</p>
+                        @*<p class="currentSpecial" style="text-align:center">@Html.ActionLink("contact us", "Contact", "Home") </p>*@
+                    </div>
+                    <div class="specialImageDiv col-xs-5 col-lg-5">
+                        <img class="specialImage img-rounded mx-auto d-block" src="@Url.Content("~/ImageSpecials/" + special.SpecialImageFileName)" />
+                    </div>
+                </div>
+
+            }
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </a>
+</div>
+<br />
+<hr />
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (Model.FeaturedVehicles.Any())
+        {
+            <h2>Featured Vehicles</h2>
+            <div class="featuredVehiclesContainer">
+                @foreach (var vehicle in Model.FeaturedVehicles)
+                {
+                    <div class="featuredVehicleDiv col-xs-2 col-md-4 col-lg-3">
+                        <a href="@Url.Action("Details", "Inventory", new { id = vehicle.VehicleId }, null)">
+                            <p class="featuredVehicle"><img class="featuredVehicleImage" src="@Url.Content("~/Images/" + vehicle.VehicleImageFileName)" /></p>
+                            <p class="featuredVehicle">@vehicle.ModelYear @vehicle.CarMakeName @vehicle.CarModelName</p>
+                            <p class="featuredVehicle">@vehicle.SalePrice.ToString("c")</p>
+                        </a>
+                    </div>
+                }
+            </div>
+            }
+            else
+            {
+                <p></p>
+            }
+        </div>
+</div>
+
+@section scripts{
+
+
+}
+

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Guild Cars!</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+
+<style>
+    .dropbtn {
+    }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        margin-top: 50px;
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        padding: 12px 5px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("SG", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <div class="nav navbar-nav">
+
+                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("New Inventory", "New", "Inventory", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Used Inventory", "Used", "Inventory", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Specials", "Specials", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Sales"))
+                        {
+                            <div class="dropdown">
+                                @Html.ActionLink("Sales", "Index_Sales", "Sales", new { area = "" }, new { @class = "navbar-brand dropbtn" })
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("Index_Sales", "Sales")">Search Inventory</a>
+                                    <a href="@Url.Action("Contacts_Sales", "Sales")">Messages</a>
+                                    <a href="@Url.Action("ChangePassword", "Manage")">Change My Password</a>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <div class="dropdown">
+                                @Html.ActionLink("Admin", "Vehicles_Admin", "Admin", new { area = "" }, new { @class = "navbar-brand dropbtn" })
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("Vehicles_Admin", "Admin")">Inventory</a>
+                                    <a href="@Url.Action("AddVehicle_Admin", "Admin")">Add New Vehicle</a>
+                                    <a href="@Url.Action("Users_Admin", "Admin")">Users</a>
+                                    <a href="@Url.Action("Specials_Admin", "Admin")">Specials</a>
+                                    <a href="@Url.Action("Makes_Admin", "Admin")">Makes</a>
+                                    <a href="@Url.Action("Models_Admin", "Admin")">Models</a>
+                                    <a href="@Url.Action("Index_Reports", "Reports")">Reports</a>
+                                    <a href="@Url.Action("ChangePassword", "Manage")">Change My Password</a>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <button style="background-color: #262626; text-decoration-color: black; color:black; border:none">@Html.ActionLink(" ", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })</button>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

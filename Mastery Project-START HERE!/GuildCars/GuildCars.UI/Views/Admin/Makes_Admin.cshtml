@@ -1,0 +1,70 @@
+﻿@model GuildCars.UI.Models.CarMakeAddViewModel
+@{
+    ViewBag.Title = "Makes_Admin";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Car Makes</h2>
+        @if (TempData["Success"] != null)
+        {
+            <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+        }
+        @if (TempData["Fail"] != null)
+        {
+            <p class="alert alert-danger" id="successMessage">@TempData["Fail"]</p>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        @using (Html.BeginForm("Makes_Admin", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddMake" }))
+        {
+            @Html.ValidationSummary()
+            <div class="form-group">
+                <label>New Make</label>
+                @Html.TextBoxFor(m => m.CarMake.CarMakeName, new { @class = "form-control" })
+            </div>
+            <button class="btn btn-primary">Save</button>
+        }
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-10">
+        @if (Model.CarMakes.Any())
+        {
+            <table style="width: auto;" class="table table-bordered table-striped">
+                <thead>
+                    <tr style="background-color: darkgray">
+                        <th>
+                            Make
+                        </th>
+                        <th>
+                            Date Added
+                        </th>
+                        <th>
+                            User
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vehicle in Model.CarMakes)
+                    {
+                        <tr>
+                            <td>@vehicle.CarMakeName</td>
+                            <td>@vehicle.CarMakeAddedDate.ToString("dd, MMM yyy")</td>
+                            <td>@vehicle.UserEmail</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>You do not have any Car Makes</p>
+        }
+    </div>
+</div>

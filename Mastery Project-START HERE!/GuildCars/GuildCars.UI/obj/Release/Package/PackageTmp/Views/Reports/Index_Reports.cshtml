@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index_Reports";
+}
+
+<style>
+    td {
+        padding-left: 15px;
+        padding-top: 8px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Reports</h2>
+    </div>
+    <table>
+        <tr>
+            <td><u>@Html.ActionLink("Inventory Report", "InventoryReports_Reports", "Reports")</u></td>
+        </tr>
+        <tr>
+            <td><u>@Html.ActionLink("Sales Report", "SalesReports_Reports", "Reports")</u></td>
+        </tr>
+    </table>
+</div>
+
+
