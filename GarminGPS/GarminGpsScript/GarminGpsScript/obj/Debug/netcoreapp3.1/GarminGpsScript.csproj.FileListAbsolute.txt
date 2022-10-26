@@ -1,0 +1,14 @@
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.exe
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.deps.json
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.runtimeconfig.json
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.runtimeconfig.dev.json
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.dll
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.pdb
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.csproj.AssemblyReference.cache
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.AssemblyInfoInputs.cache
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.AssemblyInfo.cs
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.csproj.CoreCompileInputs.cache
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.dll
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.pdb
+C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.genruntimeconfig.cache
