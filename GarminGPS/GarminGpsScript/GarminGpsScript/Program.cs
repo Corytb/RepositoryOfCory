@@ -8,7 +8,9 @@ namespace GarminGpsScript
     {
         static void Main(string[] args)
         {
-            string filePath = @"C:\Users\coryt\Downloads\2022-10-23-10-53-19.csv";      //filepath for the CSV file
+            string filePath = @"Y:\OneDrive\Pictures\Sorted Pics and Videos\2022-Q4\December, 2022- Khao Krajom\2022-12-12-09-24-32.csv";
+            //string filePath = @"C:\Users\coryt\Downloads\2022-10-23-10-53-19.csv";      //filepath for the CSV file
+
             StreamReader reader = null;
             if (File.Exists(filePath))
             {
