@@ -12,3 +12,17 @@ C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\
 C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.dll
 C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.pdb
 C:\Users\coryt\OneDrive\Desktop\Garmin Data GPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.genruntimeconfig.cache
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.exe
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.deps.json
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.runtimeconfig.json
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.runtimeconfig.dev.json
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.dll
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\bin\Debug\netcoreapp3.1\GarminGpsScript.pdb
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.csproj.AssemblyReference.cache
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.AssemblyInfoInputs.cache
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.AssemblyInfo.cs
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.csproj.CoreCompileInputs.cache
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.dll
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.pdb
+C:\Repos\RepositoryOfCory\GarminGPS\GarminGpsScript\GarminGpsScript\obj\Debug\netcoreapp3.1\GarminGpsScript.genruntimeconfig.cache

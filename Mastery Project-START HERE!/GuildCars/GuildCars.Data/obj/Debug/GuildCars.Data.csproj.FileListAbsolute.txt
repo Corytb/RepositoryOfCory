@@ -1,9 +1,0 @@
-C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Data\bin\Debug\GuildCars.Data.dll
-C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Data\bin\Debug\GuildCars.Data.pdb
-C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Data\obj\Debug\GuildCars.Data.csproj.AssemblyReference.cache
-C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Data\obj\Debug\GuildCars.Data.csproj.CoreCompileInputs.cache
-C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Data\obj\Debug\GuildCars.Data.dll
-C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Data\obj\Debug\GuildCars.Data.pdb
-C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Data\bin\Debug\GuildCars.Models.dll
-C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Data\bin\Debug\GuildCars.Models.pdb
-C:\Repos\online-net-2021-Corytb\Summatives\ddwa-mastery\GuildCars\GuildCars.Data\obj\Debug\GuildCars.Data.csproj.CopyComplete
