@@ -8,8 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace CQRS_MediatR.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : Controller
     {
         private IMediator _mediator;
         public ProductController(IMediator mediator)
@@ -24,9 +23,10 @@ namespace CQRS_MediatR.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(GetAllProductQuery query)
         {
-            return Ok(await _mediator.Send(new GetAllProductQuery()));
+            var result = await _mediator.Send(query);
+            return View("GetAllProductsView", result);
         }
 
 

@@ -181,7 +181,7 @@ namespace CQRSMediatR.Migrations
                         .IsRequired();
 
                     b.HasOne("CQRS_MediatR.Models.Product", "Product")
-                        .WithMany("Order")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -192,11 +192,6 @@ namespace CQRSMediatR.Migrations
                 });
 
             modelBuilder.Entity("CQRS_MediatR.Models.Customer", b =>
-                {
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("CQRS_MediatR.Models.Product", b =>
                 {
                     b.Navigation("Order");
                 });
