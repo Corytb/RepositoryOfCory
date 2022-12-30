@@ -15,7 +15,6 @@ builder.Services.AddDbContext<CQRS_MediatR_5Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CQRS_MediatR_5Context") ?? throw new InvalidOperationException("Connection string 'CQRS_MediatR_5Context' not found.")));
 
 
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

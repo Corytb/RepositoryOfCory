@@ -22,6 +22,165 @@ namespace IAmTraveling.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentId"));
+
+                    b.Property<DateTime>("CommentDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ThingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("ThingId");
+
+                    b.ToTable("Comments", t =>
+                        {
+                            t.HasComment("Comments that can be made by other authenticated users");
+                        });
+                });
+
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+MediaFile", b =>
+                {
+                    b.Property<int>("MediaFileId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MediaFileId"));
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ThingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MediaFileId");
+
+                    b.HasIndex("ThingId");
+
+                    b.ToTable("MediaFiles");
+                });
+
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+Thing", b =>
+                {
+                    b.Property<int>("ThingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ThingId"));
+
+                    b.Property<DateTime>("AddedToDbDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasComment("System-provided: DateTime added to database");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Description of the event, that user can add for their memories");
+
+                    b.Property<DateTime?>("ThingDate")
+                        .HasColumnType("datetime2")
+                        .HasComment("User-provided: date of the thing or event");
+
+                    b.Property<int?>("ThingLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasComment("System-provided: DateTime of most recent updates to the particular entry");
+
+                    b.Property<string>("UserIdId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ThingId");
+
+                    b.HasIndex("ThingLocationId");
+
+                    b.HasIndex("UserIdId");
+
+                    b.ToTable("Things");
+                });
+
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+ThingLocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormattedAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("LatitudeCoord")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("LongitudeCoord")
+                        .HasColumnType("float");
+
+                    b.Property<string>("PlaceId")
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("PlaceId and subsequent fields are provided by GoogleMaps (or other online map API)");
+
+                    b.Property<string>("PlaceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProvinceOrState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeOfPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ThingLocations");
+                });
+
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+TravelCompanion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CompanionId1Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanionId2Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanionId1Id");
+
+                    b.HasIndex("CompanionId2Id");
+
+                    b.ToTable("TravelCompanions", t =>
+                        {
+                            t.HasComment("TravelCompanions authorizes whether one person can view anothers' content");
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -224,6 +383,58 @@ namespace IAmTraveling.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+Comment", b =>
+                {
+                    b.HasOne("IAmTraveling.Data.ApplicationDbContext+Thing", "Thing")
+                        .WithMany("Comments")
+                        .HasForeignKey("ThingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Thing");
+                });
+
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+MediaFile", b =>
+                {
+                    b.HasOne("IAmTraveling.Data.ApplicationDbContext+Thing", "Thing")
+                        .WithMany("MediaFiles")
+                        .HasForeignKey("ThingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Thing");
+                });
+
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+Thing", b =>
+                {
+                    b.HasOne("IAmTraveling.Data.ApplicationDbContext+ThingLocation", "ThingLocation")
+                        .WithMany("Things")
+                        .HasForeignKey("ThingLocationId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserIdId");
+
+                    b.Navigation("ThingLocation");
+
+                    b.Navigation("UserId");
+                });
+
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+TravelCompanion", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CompanionId1")
+                        .WithMany()
+                        .HasForeignKey("CompanionId1Id");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CompanionId2")
+                        .WithMany()
+                        .HasForeignKey("CompanionId2Id");
+
+                    b.Navigation("CompanionId1");
+
+                    b.Navigation("CompanionId2");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -273,6 +484,18 @@ namespace IAmTraveling.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+Thing", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("MediaFiles");
+                });
+
+            modelBuilder.Entity("IAmTraveling.Data.ApplicationDbContext+ThingLocation", b =>
+                {
+                    b.Navigation("Things");
                 });
 #pragma warning restore 612, 618
         }

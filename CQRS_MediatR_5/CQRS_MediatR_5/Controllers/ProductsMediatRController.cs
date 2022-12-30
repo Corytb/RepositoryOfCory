@@ -8,11 +8,14 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CQRS_MediatR_5.Controllers
 {
+
+
     public class ProductsMediatRController : Controller
     {
         private IMediator _mediator;
         public ProductsMediatRController(IMediator mediator)
         {
+
             this._mediator = mediator;
         }
 
@@ -24,6 +27,12 @@ namespace CQRS_MediatR_5.Controllers
         //}
 
         public async Task<IActionResult> Index(GetAllProductsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return View(result);
+        }
+
+        public async Task<IActionResult> Search(GetProductsByNameQuery query)
         {
             var result = await _mediator.Send(query);
             return View(result);

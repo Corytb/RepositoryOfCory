@@ -51,6 +51,26 @@ namespace IAmTraveling.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ThingLocations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlaceId = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "PlaceId and subsequent fields are provided by GoogleMaps (or other online map API)"),
+                    PlaceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypeOfPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProvinceOrState = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FormattedAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LatitudeCoord = table.Column<double>(type: "float", nullable: true),
+                    LongitudeCoord = table.Column<double>(type: "float", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ThingLocations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -156,6 +176,102 @@ namespace IAmTraveling.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TravelCompanions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanionId1Id = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CompanionId2Id = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TravelCompanions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TravelCompanions_AspNetUsers_CompanionId1Id",
+                        column: x => x.CompanionId1Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TravelCompanions_AspNetUsers_CompanionId2Id",
+                        column: x => x.CompanionId2Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                },
+                comment: "TravelCompanions authorizes whether one person can view anothers' content");
+
+            migrationBuilder.CreateTable(
+                name: "Things",
+                columns: table => new
+                {
+                    ThingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ThingDate = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "User-provided: date of the thing or event"),
+                    AddedToDbDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "System-provided: DateTime added to database"),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "System-provided: DateTime of most recent updates to the particular entry"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Description of the event, that user can add for their memories"),
+                    ThingLocationId = table.Column<int>(type: "int", nullable: true),
+                    UserIdId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Things", x => x.ThingId);
+                    table.ForeignKey(
+                        name: "FK_Things_AspNetUsers_UserIdId",
+                        column: x => x.UserIdId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Things_ThingLocations_ThingLocationId",
+                        column: x => x.ThingLocationId,
+                        principalTable: "ThingLocations",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CommentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ThingId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comments_Things_ThingId",
+                        column: x => x.ThingId,
+                        principalTable: "Things",
+                        principalColumn: "ThingId",
+                        onDelete: ReferentialAction.Cascade);
+                },
+                comment: "Comments that can be made by other authenticated users");
+
+            migrationBuilder.CreateTable(
+                name: "MediaFiles",
+                columns: table => new
+                {
+                    MediaFileId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ThingId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MediaFiles", x => x.MediaFileId);
+                    table.ForeignKey(
+                        name: "FK_MediaFiles_Things_ThingId",
+                        column: x => x.ThingId,
+                        principalTable: "Things",
+                        principalColumn: "ThingId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +310,36 @@ namespace IAmTraveling.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ThingId",
+                table: "Comments",
+                column: "ThingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MediaFiles_ThingId",
+                table: "MediaFiles",
+                column: "ThingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Things_ThingLocationId",
+                table: "Things",
+                column: "ThingLocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Things_UserIdId",
+                table: "Things",
+                column: "UserIdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TravelCompanions_CompanionId1Id",
+                table: "TravelCompanions",
+                column: "CompanionId1Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TravelCompanions_CompanionId2Id",
+                table: "TravelCompanions",
+                column: "CompanionId2Id");
         }
 
         /// <inheritdoc />
@@ -215,10 +361,25 @@ namespace IAmTraveling.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "MediaFiles");
+
+            migrationBuilder.DropTable(
+                name: "TravelCompanions");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Things");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ThingLocations");
         }
     }
 }

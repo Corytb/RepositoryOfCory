@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IAmTraveling.Data
@@ -22,6 +23,7 @@ namespace IAmTraveling.Data
 
         public class Thing
         {
+            [Key]
             public int ThingId { get; set; }
             [Comment("User-provided: date of the thing or event")]
             public DateTime? ThingDate { get; set; }
@@ -37,7 +39,7 @@ namespace IAmTraveling.Data
             [Comment("Description of the event, that user can add for their memories")]
             public string? Description { get; set; }
 
-            public ThingLocation? ThingLocationId { get; set; }
+            public ThingLocation? ThingLocation { get; set; }
             public List<MediaFile>? MediaFiles { get; set; }
             public List<Comment>? Comments { get; set; }
 
@@ -47,6 +49,7 @@ namespace IAmTraveling.Data
 
         public class ThingLocation
         {
+            [Key]
             public int Id { get; set; }
             [Comment("PlaceId and subsequent fields are provided by GoogleMaps (or other online map API)")]
             public string? PlaceId { get; set; }
@@ -65,6 +68,7 @@ namespace IAmTraveling.Data
 
         public class MediaFile
         {
+            [Key]
             public int MediaFileId { get; set; }
             public string FileName { get; set; }
 
@@ -74,8 +78,12 @@ namespace IAmTraveling.Data
         [Comment("Comments that can be made by other authenticated users")]
         public class Comment
         {
+            [Key]
             public int CommentId { get; set; }
             public string Text { get; set; }
+
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            public DateTime CommentDate { get; set; }
 
             public Thing Thing { get; set; }
         }
@@ -83,6 +91,7 @@ namespace IAmTraveling.Data
         [Comment("TravelCompanions authorizes whether one person can view anothers' content")]
         public class TravelCompanion
         {
+            [Key]
             public int Id { get; set; }
             public IdentityUser CompanionId1 { get; set; }
             public IdentityUser CompanionId2 { get; set; }
