@@ -14,6 +14,11 @@ namespace IAmTraveling.Data
         {
         }
 
+
+
+
+
+
         public DbSet<Thing> Things { get; set; }
         public DbSet<ThingLocation> ThingLocations { get; set; }
         public DbSet<MediaFile> MediaFiles { get; set; }
