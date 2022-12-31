@@ -17,6 +17,80 @@ namespace IAmTraveling.Data
 
 
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            // Customize the ASP.NET Identity model and override the defaults if needed.
+            // For example, you can rename the ASP.NET Identity table names and more.
+            // Add your customizations after calling base.OnModelCreating(builder);
+
+
+
+            string ADMIN_ID_1 = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
+
+            string ROLE_ID_ADMIN = "1";
+            string ROLE_ID_USER = "2";
+            string ROLE_ID_DISABLED = "3";
+
+
+            //create user
+            var appUser = new IdentityUser
+            {
+                Id = ADMIN_ID_1,
+                Email = "admin@traveling.com",
+                UserName = "admin@traveling.com",
+                NormalizedUserName = "ADMIN@TRAVELING.COM",
+                NormalizedEmail = "ADMIN@TRAVELING.COM",
+                LockoutEnabled = true,
+                EmailConfirmed = true
+            };
+            //set user password
+            PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
+            appUser.PasswordHash = ph.HashPassword(appUser, "Test123!");
+            //seed user
+            modelBuilder.Entity<IdentityUser>().HasData(appUser);
+
+
+            //create roles
+            var admin_role = new IdentityRole
+            {
+                Name = "Admin",
+                NormalizedName = "ADMIN",
+                Id = ROLE_ID_ADMIN,
+                ConcurrencyStamp = ROLE_ID_ADMIN
+            };
+            var user_role = new IdentityRole
+            {
+                Name = "User",
+                NormalizedName = "USER",
+                Id = ROLE_ID_USER,
+                ConcurrencyStamp = ROLE_ID_ADMIN
+            };
+            var disabled_role = new IdentityRole
+            {
+                Name = "Disabled",
+                NormalizedName = "DISABLED",
+                Id = ROLE_ID_DISABLED,
+                ConcurrencyStamp = ROLE_ID_ADMIN
+            };
+
+            modelBuilder.Entity<IdentityRole>().HasData(admin_role);
+            modelBuilder.Entity<IdentityRole>().HasData(user_role);
+            modelBuilder.Entity<IdentityRole>().HasData(disabled_role);
+
+            //set user role to admin
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = ROLE_ID_ADMIN,
+                UserId = ADMIN_ID_1
+            });
+
+
+        }
+
+
+
+
 
 
         public DbSet<Thing> Things { get; set; }
