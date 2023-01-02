@@ -15,8 +15,6 @@ namespace IAmTraveling.Data
         }
 
 
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -87,9 +85,6 @@ namespace IAmTraveling.Data
 
 
         }
-
-
-
 
 
 

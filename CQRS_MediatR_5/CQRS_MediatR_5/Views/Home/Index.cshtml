@@ -2,7 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    #MediatRLink {
+        font-size: 2.5em
+    }
+</style>
+
+
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>
+        <a id="MediatRLink" href="@Url.Action("Index", "ProductsMediatR")">Enter the MediatR</a>
+    </p>
 </div>

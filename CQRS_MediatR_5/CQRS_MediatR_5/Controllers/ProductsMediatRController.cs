@@ -19,12 +19,6 @@ namespace CQRS_MediatR_5.Controllers
             this._mediator = mediator;
         }
 
-        //private readonly CQRS_MediatR_5Context _context;
-
-        //public ProductsMediatRController(CQRS_MediatR_5Context context)
-        //{
-        //    _context = context;
-        //}
 
         public async Task<IActionResult> Index(GetAllProductsQuery query)
         {
@@ -53,7 +47,6 @@ namespace CQRS_MediatR_5.Controllers
         public async Task<IActionResult> Details(GetProductByIdQuery query)
         {
             var result = await _mediator.Send(query);
-            //var result = await _mediator.Send(new GetProductByIdQuery { Id = id });
             return View(result);
         }
 
