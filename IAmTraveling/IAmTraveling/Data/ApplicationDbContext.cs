@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using IAmTraveling.Models.Tables;
 
 namespace IAmTraveling.Data
 {
@@ -172,5 +173,7 @@ namespace IAmTraveling.Data
             public DateTime DateCreated { get; set; }
 
         }
+
+        public DbSet<IAmTraveling.Models.Tables.Thing> Thing_1 { get; set; } = default!;
     }
 }

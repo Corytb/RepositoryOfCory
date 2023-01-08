@@ -1,0 +1,2 @@
+C:\Repos\RepositoryOfCory\angularproject3\angularproject3\obj\Debug\angularproject3.esproj.SuggestedBindingRedirects.cache
+C:\Repos\RepositoryOfCory\angularproject3\angularproject3\obj\Debug\angularproject3.esproj.CoreCompileInputs.cache

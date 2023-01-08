@@ -26,11 +26,6 @@ namespace CQRS_MediatR_5.Controllers
             return View(result);
         }
 
-        public async Task<IActionResult> Search(GetProductsByNameQuery query)
-        {
-            var result = await _mediator.Send(query);
-            return View(result);
-        }
 
         public IActionResult Create()
         {
